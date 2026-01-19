@@ -59,7 +59,7 @@ public class Service {
     static boolean deleteStudentByName(String name) {
         List<Student> students = load();
         boolean removed = false;
-        List<Student> toKeep = new ArrayList<>();
+        List<Student> toKeep = new ArrayList<Student>();
         
         for (Student s : students) {
             if (s.getName().equalsIgnoreCase(name)) {
