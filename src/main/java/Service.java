@@ -56,6 +56,38 @@ public class Service {
         return null;
     }
 
+    static boolean updateStudentAge(String name, int newAge) {
+        List<Student> students = load();
+        boolean updated = false;
+        
+        for (Student s : students) {
+            if (s.getName().equalsIgnoreCase(name)) {
+                s.setAge(newAge);
+                updated = true;
+                break;
+            }
+        }
+        
+        if (updated) {
+            FileWriter fw = null;
+            try {
+                fw = new FileWriter(FILE, false);
+                for (Student s : students) {
+                    fw.write(s.getName() + ";" + s.getAge() + ";" + s.getBirthDate() + "\n");
+                }
+            } catch (IOException e) {
+                System.out.println("Błąd zapisu podczas aktualizacji");
+            } finally {
+                if (fw != null) {
+                    try {
+                        fw.close();
+                    } catch (IOException e) {}
+                }
+            }
+        }
+        return updated;
+    }
+
     static boolean deleteStudentByName(String name) {
         List<Student> students = load();
         boolean removed = false;

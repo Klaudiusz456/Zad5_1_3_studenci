@@ -11,6 +11,7 @@ public class Main {
             System.out.println("3 - Znajdź studenta po imieniu");
             System.out.println("0 - Wyjście");
             System.out.println("4 - Usuń studenta");
+            System.out.println("5 - Zaktualizuj dane studenta");
 
             int option = sc.nextInt();
             sc.nextLine(); // czyszczenie bufora
@@ -57,6 +58,20 @@ public class Main {
                 boolean removed = Service.deleteStudentByName(name);
                 if (removed) {
                     System.out.println("Student usunięty.");
+                } else {
+                    System.out.println("Nie znaleziono studenta.");
+                }
+            }
+            else if (option == 5) {
+                System.out.print("Podaj imię i nazwisko studenta do aktualizacji: ");
+                String name = sc.nextLine();
+                System.out.print("Podaj nowy wiek: ");
+                int newAge = sc.nextInt();
+                sc.nextLine();
+
+                boolean updated = Service.updateStudentAge(name, newAge);
+                if (updated) {
+                    System.out.println("Dane studenta zostały zaktualizowane.");
                 } else {
                     System.out.println("Nie znaleziono studenta.");
                 }
